@@ -1,0 +1,30 @@
+header{
+	background-color: #8ED1CD;
+	width: 100%;
+	padding: 20px;
+}
+main{
+	min-height: 512px;
+}
+nav{
+	background-color: #103331;
+}
+.btnNav{
+	background-color: transparent;
+	color: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: none;
+	font-size: 30px;
+}
+.btnNav:hover{
+	border-radius: 2px;
+	border-bottom: green solid;
+}
+.btnNav:active{
+	border-radius: 2px;
+	border-bottom: yellow solid;
+}
+.txt-center{
+	text-align: center;
+}
