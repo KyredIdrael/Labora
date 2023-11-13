@@ -13,8 +13,8 @@
 				header("Location: ../view/public.php");
 
 			} else {
-				echo "<script>window.alert('E-mail ou Senha Invalidos!!!');
-				window.location.href='../view/login.php';</script>";
+				echo "<script>window.alert('E-mail ou Senha Invalidos!!!');</script>";
+				header("Location: ../login.php");
 			}
 
 		} else if (addslashes($_POST['usuario']) == "Funcionario") {
@@ -22,7 +22,7 @@
 			$func = new Funcionario();
 			$func->email = addslashes($_POST['email']);
 			$func->senha = hash("sha256", addslashes($_POST['senha']));
-			
+
 			if ($func->validarLogin() == true) {
 				header("Location: ../view/public.php");
 
