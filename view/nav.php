@@ -1,3 +1,4 @@
+<?php if (!isset($_SESSION)) session_start();?>
 <div class="container-fluid">
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
@@ -23,7 +24,7 @@
 			<li class="nav-item">
 				<?php 
 				if (isset($_SESSION['id']) && isset($_SESSION['email'])) {
-					echo "<button type='button' class='btnNav col-sm-12 col-md-auto' onclick='window.location.href=../controller/logout.php'>Sair</button>";
+					echo '<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href='."'../controller/logout.php'".'">sair</button>';
 
 				} else {
 					echo '<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href='."'../view/login.php'".'">Acessar Conta</button>';

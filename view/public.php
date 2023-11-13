@@ -1,3 +1,6 @@
+<?php 
+	if (!isset($_SESSION)) session_start(); 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,12 +22,13 @@
 	<body>
 		<header id="header"></header>
 		<nav id="nav" class="navbar navbar-expand-lg navbar-dark"></nav>
-		<main id="main" class="container">
-			<div class="row justify-content-center">
-				<div class="col-5">
+		
 					<?php 
 						if (empty($_SESSION['id']) && empty($_SESSION['email'])) {
 							echo '
+							<main id="main" class="container">
+								<div class="row justify-content-center">
+									<div class="col-5">
 								<p class="mt-5">O AgendME é um serviço de agendamento Exames Médicos.</p>
 								<ul>
 									<li>Exames de Rotina</li>
@@ -41,9 +45,6 @@
 							
 						} else if (isset($_SESSION['id']) && isset($_SESSION['email']) && empty($_SESSION['nivelAcesso'])) {
 							echo '
-										</div>
-									</div>			
-								</main>
 								<nav class="container">
 									<div class="row justify-content-center">
 										<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href=public.php">Dados Pessoais</button>
@@ -53,9 +54,6 @@
 
 						} else if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['nivelAcesso'])) {
 							echo '
-									</div>
-								</div>			
-							</main>
 							<nav class="container">
 								<div class="row justify-content-center">
 									<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href=public.php">Dados Pessoais</button>

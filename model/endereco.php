@@ -98,6 +98,7 @@ class Endereco {
 		$this->id = $array['id'];
 		return true;
 	}
+
     public function selectAll(){
         $cmd = $this->pdo->query("SELECT id, cep, uf, cidade, bairro, rua, status FROM Endereco WHERE status = 1");
 		$con = $cmd->fetchAll(PDO::FETCH_ASSOC);

@@ -52,7 +52,7 @@ class Clinica{
         $cmd->bindValue(":tel", $this->tel);
         $cmd->bindValue(":email", $this->email);
         $cmd->execute();
-        $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+        $cmd->fetch(PDO::FETCH_ASSOC);
 
         // Cadastra Endereço
         require_once 'endereco.php';

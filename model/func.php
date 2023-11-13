@@ -60,7 +60,7 @@
             $cmd->bindValue(":cpf", $this->cpf);
             $cmd->execute();
             $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-            if ($dados->rowCount() > 0) {
+            if (count($dados) > 0) {
                 return false;
             } else {
                 $r = $this->cadastraFuncionario();
@@ -70,7 +70,6 @@
             }
             
         }
-
 
         protected function cadastraFuncionario()    
         {
@@ -137,10 +136,10 @@
         }
         public function selectAll()
         {
-            $cmd = $this->pdo->query("SELECT * FROM Endereco WHERE status = 1");
+            $cmd = $this->pdo->query("SELECT * FROM Funcionario WHERE status = 1");
             $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
             if (count($con) > 0) {
-                for ($i=0; $i < count($con); $i++) {
+                for ($i = 0; $i < count($con); $i++) {
                     echo "<tr>
                             <td>
                                 <p class='dados'>Nome: ".$con[$i]['nome']."</p>
@@ -169,8 +168,9 @@
                         </tr>
                     <tr><td><hr/></td></tr>";
                 }
-            }
+            }                
         }
+
         public function validarLogin()
         {
             $cmd = $this->pdo->prepare("SELECT id, email, nivelAcesso FROM Funcionario WHERE email = :user AND senha = :pass");
@@ -185,6 +185,9 @@
                 if (!isset($_SESSION)) {
                     session_start();
                 }
+
+                print_r($dados);
+
                 $_SESSION['id'] = $dados['id'];
                 $_SESSION['email'] = $dados['email'];
                 $_SESSION['nivelAcesso'] = $dados['nivelAcesso'];

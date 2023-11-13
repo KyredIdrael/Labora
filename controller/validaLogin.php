@@ -14,7 +14,7 @@
 
 			} else {
 				echo "<script>window.alert('E-mail ou Senha Invalidos!!!');</script>";
-				header("Location: ../login.php");
+				header("Location: ../view/login.php");
 			}
 
 		} else if (addslashes($_POST['usuario']) == "Funcionario") {

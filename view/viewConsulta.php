@@ -1,9 +1,7 @@
 <?php
-error_reporting(0);
 	if (!isset($_SESSION)) session_start();
-	if (!isset($_SESSION['UserIDid']) || !isset($_SESSION['nome']) || empty($_SESSION['UserEmail'])) {
+	if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || empty($_SESSION['nivelAcesso'])) {
 		session_destroy();
-		header("Location: index.php?error=3"); exit;
 	}
 ?>
 <!DOCTYPE html>
@@ -69,23 +67,23 @@ error_reporting(0);
 				}
 				?>';">Cadastrar...</button><br/><br/>
 				<div style="display: block; float: left;">
-					<b>Consultar Cadastro de ...</b>
+					<b>Consultar Cadastro de ... &nbsp;</b>
 				</div>
 				<div style="display: block; float: left;">
-					<label>Cliente</label>
-					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Cliente';" <?php if (addslashes($_GET['table']) == "Cliente") echo "checked";;?>/>&nbsp;
+					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Cliente';" <?php if (addslashes($_GET['table']) == "Cliente") echo "checked";;?>/>
+					<label>Cliente |&nbsp;</label>
 				</div>
 				<div style="display: block; float: left;">
-					<label>ADM</label>
-					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=ADM';" <?php if (addslashes($_GET['table']) == "ADM") echo "checked";;?>/>&nbsp;
+					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Funcionario';" <?php if (addslashes($_GET['table']) == "Funcionario") echo "checked";;?>/>
+					<label>Funcionario |&nbsp;</label>
 				</div>
 				<div style="display: block; float: left;">
-					<label>Endereço</label>
-					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Endereco';" <?php if (addslashes($_GET['table']) == "Endereco") echo "checked";;?>/>&nbsp;
+					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Endereco';" <?php if (addslashes($_GET['table']) == "Endereco") echo "checked";;?>/>
+					<label>Endereço |&nbsp;</label>
 				</div>
 				<div style="display: block; float: left;">
+					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Clinica';" <?php if (addslashes($_GET['table']) == "Clinica") echo "checked";;?>/>
 					<label>Clinica</label>
-					<input type="radio" name="table" onclick="window.location.href='viewConsulta.php?table=Clinica';" <?php if (addslashes($_GET['table']) == "Clinica") echo "checked";;?>/>&nbsp;
 				</div>
 				<br/><br/>				
 			</td>

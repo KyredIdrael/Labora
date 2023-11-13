@@ -8,14 +8,22 @@
 	if (isset($_GET) && isset($_GET['id_ex'])
 		&& isset($_GET['table'])
 		&& ($_GET['table'] == "Clinica")) {
-			require_once '../m/Clinica.php';
+			require_once '../model/Clinica.php';
 			$cli = new Clinica();
 			$cli->id = addslashes($_GET['id_ex']);
 			$cli->dasabilitaClinica();
-	}
-	else if ($_GET['table'] == "Endereco") {
-		$idExclui = addslashes($_GET['id_ex']);
-		$pdo->delete($idExclui, 2);		
+
+	} else if ($_GET['table'] == "Endereco") {
+		require_once '../model/Clinica.php';
+		$end = new Endereco();
+		$end->id = addslashes($_GET['id_ex']);
+		$end->dasbilitaEndereco();
+
+	} else if ($_GET['table'] == "Cliente") {
+		require_once '../model/cliente.php';
+		$cli = new Cliente();
+		$cli->id = addslashes($_GET['id_ex']);
+		$cli->desabilitaCliente();		
 	}
 	header('Location: ../v/consulta.php?table='.addslashes($_GET['table']));
 ?>

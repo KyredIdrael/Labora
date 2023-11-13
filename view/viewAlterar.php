@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 	if (!isset($_SESSION)) session_start();
-	if (!isset($_SESSION['UserIDid']) || !isset($_SESSION['nome']) || empty($_SESSION['UserEmail'])) {
+	if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || empty($_SESSION['nivelAcesso'])) {
 		session_destroy();
 		header("Location: index.php?error=3"); exit;
 	}

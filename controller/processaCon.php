@@ -23,4 +23,10 @@
         $fun = new Funcionario();
 		$consulta = $fun->selectAll();
 	}
+	else if (isset($_GET) && isset($_GET['table'])
+		&& $_GET['table'] == "Cliente") {
+            require_once '../model/cliente.php';
+        $fun = new Cliente();
+		$consulta = $fun->selectAll();
+	}
 ?>
