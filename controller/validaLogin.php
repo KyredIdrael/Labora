@@ -13,8 +13,10 @@
 				header("Location: ../view/public.php");
 
 			} else {
-				echo "<script>window.alert('E-mail ou Senha Invalidos!!!');</script>";
-				header("Location: ../view/login.php");
+				echo "<script>
+					window.alert('E-mail ou Senha Invalidos!!!');
+					window.location.href='../view/login.php';
+				</script>";
 			}
 
 		} else if (addslashes($_POST['usuario']) == "Funcionario") {

@@ -5,21 +5,21 @@
 	</button>
 	<div class="collapse navbar-collapse justify-content-center" id="navbarNavDarkDropdown">
 		<ul class="navbar-nav">
-			<li class="nav-item">
-				<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href='public.php'">Home</button>
+			<li class="nav-item col-sm-12 col-md-12">
+				<button type="button" class="btnNav" onclick="window.location.href='public.php'">Home</button>
 			</li>
-			<li class="nav-item dropdown">
-				<button type="button" class="btnNav col-sm-12 col-md-auto dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Serviços</button>
+			<li class="nav-item dropdown col-sm-12 col-md-auto">
+				<button type="button" class="btnNav dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Serviços</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="#">Clinicas</a></li>
 					<li><a class="dropdown-item" href="#">Exames</a></li>
 				</ul>
 			</li>
-			<li class="nav-item">
-				<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href=''">Quem Somos</button>
+			<li class="nav-item col-sm-12 col-md-auto">
+				<button type="button" class="btnNav" onclick="window.location.href=''">Quem Somos</button>
 			</li>
-			<li class="nav-item">
-				<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href=''">Contato</button>
+			<li class="nav-item col-sm-12 col-md-auto">
+				<button type="button" class="btnNav" onclick="window.location.href=''">Contato</button>
 			</li>
 			<li class="nav-item">
 				<?php 
