@@ -18,17 +18,17 @@
 	 *  
 	 */
 
-class Clinica{
+class Clinica {
     private $pdo;
-    private $end;  //
-    private $nome;   //
+    private $id;
+    private $nome;
     private $email;
     private $tel;
+    private $end;
     private $nRes;
     private $servicos;
-    private $comp; // 
-    private $status; //    
-   
+    private $comp;
+    private $status;
 
     function __construct()
     {
@@ -52,7 +52,7 @@ class Clinica{
         $cmd->bindValue(":tel", $this->tel);
         $cmd->bindValue(":email", $this->email);
         $cmd->execute();
-        $cmd->fetch(PDO::FETCH_ASSOC);
+        $dados = $cmd->fetch(PDO::FETCH_ASSOC);
 
         // Cadastra Endereço
         require_once 'endereco.php';
@@ -61,7 +61,7 @@ class Clinica{
         $end->uf = $this->end->uf;
         $end->cidade = $this->end->cidade;
         $end->bairro = $this->end->bairro;
-        $end->rua = $this->end->bairro;
+        $end->rua = $this->end->rua;
         
         $end->cadastrarEndereco();
         // Pega id do endereço para a foreign key
@@ -139,42 +139,80 @@ class Clinica{
     public function selectAll(){
         $cmd = $this->pdo->query("SELECT * FROM Clinica WHERE status = 1");
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            if (count($con) > 0) {
-                for ($i=0; $i < count($con); $i++) {
-                    $str = stripslashes($con[$i]['servicos']);
-                    $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
-                    $array = json_decode($str);
-                    echo "<tr>
-                            <td>
-                                <p class='dados'>Código de clinica: ".$con[$i]['id']."</p>
-                                <p class='dados'>Nome: ".$con[$i]['nome']."</p>
-                                <p class='dados'>Serviços:<br/>";
-                    foreach ($array as $key => $value) {
-                        echo "- ".$value."<br/>";
-                    }
-                    echo "</ul></p>
-                        <p class='dados'>E-mail: ".$con[$i]['email']."
-                        </p>
-                        <p class='dados'>Telefone: ".$con[$i]['telefone']."
-                        </p>
-                        <p class='dados'>Endereco: ".$con[$i]['idEnd']."</p>
-                        <p> Status: ".$con[$i]['status']."</p>
-                        </td>
-                        <td style='width: 5%;'>
-                            <a href='../v/viewAlterar.php?table=Clinica&id_up=".$con[$i]['id']."'>
-                                <img class='btnAlt' src='img/icons/altclaro.png'/>
-                            </a>
-                        </td>
-                        <td style='width: 5%;'>
-                            <a href='../c/processa_ex.php?table=Clinica&id_ex=".$con[$i]['id']."'>
-                                <img class='btnDel' src='img/icons/delclaro.png'/>
-                            </a>
-                        </td>					
-                    </tr>
-                    <tr><td><hr/></td></tr>";			
-                }
+        if (count($con) > 0) {
+            
+            for ($i=0; $i < count($con); $i++) {
+                $str = stripslashes($con[$i]['servicos']);
+                $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
+                $this->servicos = json_decode($str);
+
+                echo "<tr>
+                        <td>
+                            <p class='dados'>Código de clinica: ".$con[$i]['id']."</p>
+                            <p class='dados'>Nome: ".$con[$i]['nome']."</p>
+                            <p class='dados'>Serviços:<br/>";
+                echo $this->mostraServicos($this->servicos);
+                echo "</ul></p>
+                    <p class='dados'>E-mail: ".$con[$i]['email']."
+                    </p>
+                    <p class='dados'>Telefone: ".$con[$i]['telefone']."
+                    </p>
+                    <p class='dados'>Endereco: ".$con[$i]['idEnd']."</p>
+                    <p> Status: ".$con[$i]['status']."</p>
+                    </td>
+                    <td style='width: 5%;'>
+                        <a href='../v/viewAlterar.php?table=Clinica&id_up=".$con[$i]['id']."'>
+                            <img class='btnAlt' src='img/icons/altclaro.png'/>
+                        </a>
+                    </td>
+                    <td style='width: 5%;'>
+                        <a href='../c/processa_ex.php?table=Clinica&id_ex=".$con[$i]['id']."'>
+                            <img class='btnDel' src='img/icons/delclaro.png'/>
+                        </a>
+                    </td>					
+                </tr>
+                <tr><td><hr/></td></tr>";
             }
+        }
+    }
+    
+    public function getClinicas() {
+        $cmd = $this->pdo->query("SELECT * FROM Clinica WHERE status = 1");
+        $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
+        if (count($con) > 0) {
+            require_once 'endereco.php';
+            $end = new Endereco();
+            foreach ($con as $registro) {
+                $end->id = $registro['idEnd'];
+                $end->getEndById();
+                $endereco = $end->rua.", ".$registro['nRes']." - ".$end->bairro.", ".$end->cidade." - ".$end->uf. ", ".$end->cep;
+                $str = stripslashes($registro['servicos']);
+                $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
+                $this->servicos = json_decode($str, true);
+
+                echo '<div class="col-sm-12 col-md-6 card">
+                            <h4>'.$registro['nome'].'</h4>
+                            <p>
+                                <strong class="dTitle">Serviços</strong>:<br/>';
+                $this->mostraServicos($this->servicos);
+                echo '</p>
+                    <p>
+                        <strong class="dTitle">Endereço</strong>: '.$endereco.'
+                    </p>
+                    <p>
+                        <strong class="dTitle">Contato</strong><br/>
+                        Telefone: '.$registro['telefone'].'<br/>
+                        Email: '.$registro['email'].'
+                    </p>
+                </div>';
+            }
+        }
     }
 
+    protected function mostraServicos($array) {
+        foreach ($array as $key => $value) {
+            echo "- ".$value."<br/>";
+        }
+    }
 }
 ?>

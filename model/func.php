@@ -19,21 +19,22 @@
     class Funcionario {
 
         private $pdo;
+        private $id
         private $nome;
         private $rg;
         private $cpf;
+        private $dataNasc;
+        private $genero;
+        private $estadoCiv;
         private $email;
         private $senha;
-        private $dataNasc;
-        private $gen;
-        private $estadoCiv;
         private $tel;
         private $cel;
         private $end;
         private $nRes;
-        private $id;
         private $comp;
-        private $nivelAcess;
+        private $nivelAcesso;
+        private $status;
 
         function __construct()
         {
@@ -67,8 +68,7 @@
                 if ($r == true || $r == 1) {
                     return true;
                 }
-            }
-            
+            }            
         }
 
         protected function cadastraFuncionario()    

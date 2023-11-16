@@ -5,14 +5,14 @@
 	</button>
 	<div class="collapse navbar-collapse justify-content-center" id="navbarNavDarkDropdown">
 		<ul class="navbar-nav">
-			<li class="nav-item col-sm-12 col-md-12">
+			<li class="nav-item col-sm-12 col-md-auto">
 				<button type="button" class="btnNav" onclick="window.location.href='public.php'">Home</button>
 			</li>
 			<li class="nav-item dropdown col-sm-12 col-md-auto">
 				<button type="button" class="btnNav dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Serviços</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Clinicas</a></li>
-					<li><a class="dropdown-item" href="#">Exames</a></li>
+					<li><a class="dropdown-item" href="viewClinicas.php">Clinicas</a></li>
+					<li><a class="dropdown-item" href="viewExames.php">Exames</a></li>
 				</ul>
 			</li>
 			<li class="nav-item col-sm-12 col-md-auto">

@@ -1,10 +1,10 @@
 <?php
-	/*if (empty($_SESSION)) session_start();
+	if (empty($_SESSION)) session_start();
 
 	if (empty($_SESSION['UserID']) || empty($_SESSION['UserName']) || empty($_SESSION['UserEmail'])) {
 		session_destroy();
 		header("Location: http://localhost/tazware/v/index.php?error=5"); exit;
-	}*/
+	}
 	if (isset($_GET) && isset($_GET['id_ex'])
 		&& isset($_GET['table'])
 		&& ($_GET['table'] == "Clinica")) {

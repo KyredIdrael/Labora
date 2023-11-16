@@ -45,19 +45,6 @@ class Endereco {
 		}
     }
 
-    public function consultaEndereco() {
-        $sql = "SELECT * FROM Endereco";
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->execute();
-        $cmd->fetchAll(PDO::FETCH_ASSOC);
-        if ($cmd->rowCount() > 0) {
-            return true;
- 
-        } else {
-            return false;
-        }
-    }
-
     public function alterarEndereco() {
         $status = 1;
         $sql = "UPDATE Endereco SET uf = :uf, cidade = :cidade, bairro = :bairro, rua = :rua, status = :stat WHERE cep = :cep";
@@ -119,7 +106,7 @@ class Endereco {
 							</a>
 						</td>
 						<td style='width: 5%;'>
-							<a href='http://localhost/tazware/c/processa_ex.php?table=Endereco&id_ex=".$con[$i]['id']."'>
+							<a href='/processa_ex.php?table=Endereco&id_ex=".$con[$i]['id']."'>
 								<img class='btnDel' src='img/icons/delclaro.png'/>
 							</a>
 						</td>					
@@ -127,6 +114,20 @@ class Endereco {
 				<tr><td><hr/></td></tr>";
 			}
 		}
+    }
+    public function getEndById()
+    {
+    	$sql = "SELECT * FROM Endereco WHERE id = :id";
+		$cmd = $this->pdo->prepare($sql);
+		$cmd->bindValue(":id", $this->id);
+		$cmd->execute();
+		$array = $cmd->fetch(PDO::FETCH_ASSOC);
+		$this->cep = $array['cep'];
+		$this->uf = $array['uf'];
+		$this->cidade = $array['cidade'];
+		$this->bairro = $array['bairro'];
+		$this->rua = $array['rua'];
+		return true;
     }
 }
 ?>
