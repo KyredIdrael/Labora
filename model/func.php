@@ -140,6 +140,9 @@
             $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
             if (count($con) > 0) {
                 for ($i = 0; $i < count($con); $i++) {
+                    $end->id = $con[$i]['idEnd'];
+                    $end->getEndById();
+                    $endereco = $end->rua.", ".$con['nRes']." - ".$end->bairro.", ".$end->cidade." - ".$end->uf. ", ".$end->cep;
                     echo "<tr>
                             <td>
                                 <p class='dados'>Nome: ".$con[$i]['nome']."</p>

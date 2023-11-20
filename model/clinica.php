@@ -140,8 +140,12 @@ class Clinica {
         $cmd = $this->pdo->query("SELECT * FROM Clinica WHERE status = 1");
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
         if (count($con) > 0) {
-            
+            require_once 'endereco.php';
+            $end = new Endereco(); 
             for ($i=0; $i < count($con); $i++) {
+                $end->id = $con[$i]['idEnd'];
+                $end->getEndById();
+                $endereco = $end->rua.", ".$con[$i]['nRes']." - ".$end->bairro.", ".$end->cidade." - ".$end->uf. ", ".$end->cep;
                 $str = stripslashes($con[$i]['servicos']);
                 preg_replace("/[\x00-\x1F\x80-\xFF]/", '', $str);
                 $this->servicos = json_decode($str, true);
@@ -156,7 +160,7 @@ class Clinica {
                     </p>
                     <p class='dados'>Telefone: ".$con[$i]['telefone']."
                     </p>
-                    <p class='dados'>Endereco: ".$con[$i]['idEnd']."</p>
+                    <p class='dados'>Endereco: ".$endereco."</p>
                     <p> Status: ".$con[$i]['status']."</p>
                     </td>
                     <td style='width: 5%;'>
@@ -180,7 +184,7 @@ class Clinica {
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
         if (count($con) > 0) {
             require_once 'endereco.php';
-            $end = new Endereco();
+            $end = new Endereco();          
             foreach ($con as $registro) {
                 $end->id = $registro['idEnd'];
                 $end->getEndById();
