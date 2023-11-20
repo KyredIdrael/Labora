@@ -17,9 +17,9 @@ error_reporting(0);
 		<script src="js/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("#header").load('header.php');
+				$("#header").load('header.html');
 				$("#nav").load('nav.php');
-				$("#footer").load('footer.php');
+				$("#footer").load('footer.html');
 			})
 		</script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">

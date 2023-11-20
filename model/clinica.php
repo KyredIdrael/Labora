@@ -1,6 +1,6 @@
 <?php
 
-/*
+    /*
 	 * 
 	 * REGRAS DE PROGAMAÇÃO PARA O SISTEMA
 	 *
@@ -143,9 +143,8 @@ class Clinica {
             
             for ($i=0; $i < count($con); $i++) {
                 $str = stripslashes($con[$i]['servicos']);
-                $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
-                $this->servicos = json_decode($str);
-
+                preg_replace("/[\x00-\x1F\x80-\xFF]/", '', $str);
+                $this->servicos = json_decode($str, true);
                 echo "<tr>
                         <td>
                             <p class='dados'>Código de clinica: ".$con[$i]['id']."</p>
@@ -210,8 +209,8 @@ class Clinica {
     }
 
     protected function mostraServicos($array) {
-        foreach ($array as $key => $value) {
-            echo "- ".$value."<br/>";
+        foreach ($array as $key) {
+            echo "- ".$key."<br/>";
         }
     }
 }

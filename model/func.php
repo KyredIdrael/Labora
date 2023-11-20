@@ -19,7 +19,7 @@
     class Funcionario {
 
         private $pdo;
-        private $id
+        private $id;
         private $nome;
         private $rg;
         private $cpf;

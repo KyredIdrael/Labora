@@ -15,9 +15,9 @@
 	<script src="js/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("#header").load('header.php');
+				$("#header").load('header.html');
 				$("#nav").load('nav.php');
-				$("#footer").load('footer.php');
+				$("#footer").load('footer.html');
 			})
 		</script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -89,7 +89,7 @@
 				<br/><br/>				
 			</td>
 		</tr>
-		<!--O laço(chamado pelo arquivo abaixo) mostra a consulta completa-->
+		<!--A função selectAll(chamada pelo arquivo abaixo) mostra a consulta-->
 		<?php require_once '../controller/processaCon.php';?>
 	</table>	
 	<footer id="footer" class="py-3"></footer>

@@ -11,10 +11,8 @@
         $cli->nome = addslashes($_POST['nome']);
         $cli->email = addslashes($_POST['email']);
         
-		$servico = substr(addslashes($_POST['servicos']), 0, -1);
-
-		$cli->servicos = $servico."}";
-
+		$cli->servicos = addslashes($_POST['servicos']);
+		
 		//tirar caracteres especiais
 		require_once 'clearstr.php';
 		$clean = new Cleaner();

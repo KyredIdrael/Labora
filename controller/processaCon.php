@@ -12,27 +12,23 @@ error_reporting(0);
         require_once '../model/endereco.php';
         $end = new Endereco();
 		$consulta = $end->selectAll();
-		echo $consulta;
 	}	
 	else if (isset($_GET) && isset($_GET['table'])
 		&& $_GET['table'] == "Clinica") {
         require_once '../model/clinica.php';
         $cli = new Clinica();
 		$consulta = $cli->selectAll();
-		echo $consulta;
 	}
 	else if (isset($_GET) && isset($_GET['table'])
 		&& $_GET['table'] == "Funcionario") {
         require_once '../model/func.php';
         $fun = new Funcionario();
 		$consulta = $fun->selectAll();
-		echo $consulta;
 	}
 	else if (isset($_GET) && isset($_GET['table'])
 		&& $_GET['table'] == "Cliente") {
         require_once '../model/cliente.php';
         $fun = new Cliente();
 		$consulta = $fun->selectAll();
-		echo $consulta;
 	}
 ?>

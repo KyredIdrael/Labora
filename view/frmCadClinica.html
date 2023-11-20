@@ -10,9 +10,9 @@
     <script src="js/jquerymask.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#header").load('header.php');
+                $("#header").load('header.html');
                 $("#nav").load('nav.php');
-                $("#footer").load('footer.php');
+                $("#footer").load('footer.html');
             })
         </script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -48,7 +48,8 @@
                                     <label for="servico" class="form-label">Serviço*</label>
                                     <input type="text" id="servico" class="form-control" placeholder="Serviço"
                                         autocomplete="true" />
-                                    <button type="button" class="form-control btn btn-secondary" onclick="associarServico()">Adicionar Serviço</button>
+                                    <button type="button" class="form-control btn btn-secondary my-1" onclick="adicionarServico()">Adicionar Serviço</button>
+                                    <button type="button" class="form-control btn btn-danger" onclick="removerServico()">Remover Serviço</button>
 
                                     <label for="servicos" class="form-label">Lista de Serviços associados</label>
                                     <textarea id="servicos" class="form-control" placeholder="Serviços Associados" readonly></textarea>
@@ -137,19 +138,23 @@
         const servico = document.getElementById('servico');
         const servicos = document.getElementById('servicos');
         const strJson = document.getElementById('strJson');
-        strJson.value = "{";
-        let contador = 0;
+        let jsonString, array = [];
 
-        function associarServico() {
-            let str = servico.value;
-            if (str.length > 0) {                
-                servicos.value += servico.value + "\n";
-                strJson.value += '"' + contador + '":"' + servico.value + '",';
-                console.log(strJson.value);
-                servico.value = '';
-                contador++;
-            }
-        }        
+        function adicionarServico() {            
+            array.push(servico.value);
+            jsonString = JSON.stringify(array);
+            strJson.value = jsonString;
+            servicos.value = array.join(', ');
+            console.log(strJson.value);
+        }
+
+        function removerServico() {
+            array.pop();
+            jsonString = JSON.stringify(array);
+            strJson.value = jsonString;
+            servicos.value = array.join(', ');
+            console.log(strJson.value);
+        }
     </script>
     <script src="js/buscaCEP.js"></script>
 </body>
