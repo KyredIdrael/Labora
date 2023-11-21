@@ -13,8 +13,7 @@
 		$cli->nome = addslashes($_POST['nome']);
 		$cli->email = addslashes($_POST['email']);
 		$cli->senha = hash("sha256", addslashes($_POST['senha']));
-		$cli->rg = addslashes($_POST['rg']);
-		
+		$cli->rg = addslashes($_POST['rg']);		
 		$cli->dataNasc = addslashes($_POST['dataNasc']);
 		$cli->genero = addslashes($_POST['genero']);
 
@@ -27,7 +26,7 @@
 		$cli->cpf =  $str->cleanNumbers(addslashes($_POST['cpf']));
 
 		// A variavel end na classe Cliente recebe um objeto(por conversão do array).	
-		$cli->end = (object) array('cep' => $cep, 'uf' => addslashes($_POST['uf']), 'cidade' => addslashes($_POST['cidade']), 'bairro' => addslashes($_POST['bairro']), 'rua' => addslashes($_POST['rua']),);
+		$cli->end = (object) array('cep' => $cep, 'uf' => addslashes($_POST['uf']), 'cidade' => addslashes($_POST['cidade']), 'bairro' => addslashes($_POST['bairro']), 'rua' => addslashes($_POST['rua']), 'idEnd' => "");
 		$cli->nRes = addslashes($_POST['nRes']);
 		$cli->comp = addslashes($_POST['complemento']);
 

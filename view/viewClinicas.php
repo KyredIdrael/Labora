@@ -35,7 +35,11 @@
                 </div>
             </section>
             <article class="row justify-content-center">
-                <?php require_once '../controller/processaConClinicas.php';?>
+                <?php 
+                    require_once '../model/clinica.php';
+                    $cli = new Clinica();
+                    $consulta = $cli->getClinicas();
+                ?>
             </article>
             <section class="container-fluid" id="form-exame">
                 <div class="row justify-content-center">

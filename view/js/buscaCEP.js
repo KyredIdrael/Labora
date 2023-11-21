@@ -15,13 +15,13 @@ function buscaCep() {
     }).done(function() {
         if (retornoJson.erro) {
             alert("CEP "+cep+" Inválido !");
-        } else{
-            //document.getElementById('jsonretorno').innerHTML = JSON.stringify(retornoJson);
+
+        } else {
             document.getElementById('Rua').value = retornoJson.logradouro;
             document.getElementById('Bairro').value = retornoJson.bairro;
             document.getElementById('Cidade').value = retornoJson.localidade;
             document.getElementById('Uf').value = retornoJson.uf;
-            }
+        }
     });
 }
 $(document).ready(function () {

@@ -56,8 +56,8 @@
 						<div class="nav-item dropdown col-sm-12 col-md-auto">
 							<button type="button" class="btnNav dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Cadastra</button>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="frmCadClinica.html">Clinica</a></li>
-								<li><a class="dropdown-item" href="frmCadFunc.html">Funcionarios</a></li>
+								<li><a class="dropdown-item" href="frmCadClinica.php">Clinica</a></li>
+								<li><a class="dropdown-item" href="frmCadFunc.php">Funcionarios</a></li>
 							</ul>
 						</div>
 						<div class="nav-item dropdown col-sm-12 col-md-auto">

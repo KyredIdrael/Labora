@@ -1,10 +1,16 @@
+<?php
+    if (!isset($_SESSION)) session_start();
+    if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || empty($_SESSION['nivelAcesso'])) {
+        session_destroy();
+        header("Location: public.php");
+    }
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastra Clinicas</title>
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/jquerymask.js"></script>
@@ -18,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
 <body style="background-color: #103331;">
     <header id="header"></header>    
     <main class="container">
@@ -67,8 +72,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                 
                                     <label for="Cep" class="form-label" on>CEP*</label>
-                                    <input type="text" name="cep" id="Cep" class="form-control" onblur="buscaCep()" maxlength="8" placeholder="_____-___"
-                                        required />
+                                    <input type="text" name="cep" id="Cep" class="form-control" onblur="buscaCep()" maxlength="8" placeholder="_____-___" required />
                 
                                     <label for="Uf" class="form-label">UF*</label>
                                     <select class="form-select" id="Uf" name="uf" required>
@@ -115,9 +119,8 @@
                                         required />
                 
                                     <label for="Comp" class="form-label">Complemento</label>
-                                    <textarea name="complemento" id="Comp" class="form-control" maxlength="500" rows="3"
-                                        placeholder="Complemento"></textarea><br />
-                
+                                    <textarea name="complemento" id="Comp" class="form-control mb-2" maxlength="500" rows="3"
+                                        placeholder="Complemento"></textarea>              
                                 </div>
                             </div>
                             <div class="row justify-content-center">

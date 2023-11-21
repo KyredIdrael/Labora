@@ -27,11 +27,10 @@ class Endereco {
 		$cmd->bindparam(":cep", $this->cep);
 		$cmd->execute(); 
 		$cmd->fetch(PDO::FETCH_ASSOC);
-		if ($cmd->rowCount() > 0) {
-			$this->alterarEndereco();
-            return false;
-		}
-		else{
+		if ($cmd->rowCount() > 0) {			
+            return $this->alterarEndereco();
+
+		} else {
 			$status = 1;
 			$cmd = $this->pdo->prepare('INSERT INTO Endereco (cep, uf, cidade, bairro, rua, status) VALUES (:cep, :uf, :cid, :bairro, :rua, :stat)');
 			$cmd->bindValue(":cep", $this->cep);
@@ -44,47 +43,6 @@ class Endereco {
 			return true;
 		}
     }
-
-    public function alterarEndereco() {
-        $status = 1;
-        $sql = "UPDATE Endereco SET uf = :uf, cidade = :cidade, bairro = :bairro, rua = :rua, status = :stat WHERE cep = :cep";
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":cep", $this->cep);
-        $cmd->bindValue(":uf", $this->uf);
-        $cmd->bindValue(":cidade", $this->cidade);
-        $cmd->bindValue(":bairro", $this->bairro);
-        $cmd->bindValue(":rua", $this->rua);
-        $cmd->bindParam(':stat', $status, PDO::PARAM_INT, 1);
-        $r = $cmd->execute();
-        if($r == true || $r == 1){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function desabilitarEndereco() {
-        $sql = "UPDATE Endereco SET status = :st WHERE id = :id";
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":st", $this->status);
-        $cmd->bindValue(":id", $this->id);
-        $r = $cmd->execute();
-        if($r == true || $r == 1){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-	public function getIdEnd() {
-		$sql = "SELECT id FROM Endereco WHERE cep = :c";
-		$cmd = $this->pdo->prepare($sql);
-		$cmd->bindValue(":c", $this->cep);
-		$cmd->execute();
-		$array = $cmd->fetch(PDO::FETCH_ASSOC);
-		$this->id = $array['id'];
-		return true;
-	}
 
     public function selectAll(){
         $cmd = $this->pdo->query("SELECT id, cep, uf, cidade, bairro, rua, status FROM Endereco");
@@ -115,6 +73,43 @@ class Endereco {
 			}
 		}
     }
+
+    public function alterarEndereco() {
+        $status = 1;
+        $sql = "UPDATE Endereco SET uf = :uf, cidade = :cidade, bairro = :bairro, rua = :rua, status = :stat WHERE cep = :cep";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":cep", $this->cep);
+        $cmd->bindValue(":uf", $this->uf);
+        $cmd->bindValue(":cidade", $this->cidade);
+        $cmd->bindValue(":bairro", $this->bairro);
+        $cmd->bindValue(":rua", $this->rua);
+        $cmd->bindParam(':stat', $status, PDO::PARAM_INT, 1);
+        $cmd->execute();
+        if($cmd == true || $cmd == 1){
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    public function desabilitarEndereco() {
+        $sql = "UPDATE Endereco SET status = :st WHERE id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":st", $this->status);
+        $cmd->bindValue(":id", $this->id);
+        $cmd->execute();
+    }
+
+	public function getIdEnd() {
+		$sql = "SELECT id FROM Endereco WHERE cep = :c";
+		$cmd = $this->pdo->prepare($sql);
+		$cmd->bindValue(":c", $this->cep);
+		$cmd->execute();
+		$array = $cmd->fetch(PDO::FETCH_ASSOC);
+		$this->id = $array['id'];
+	}
+
     public function getEndById()
     {
     	$sql = "SELECT * FROM Endereco WHERE id = :id";
@@ -127,7 +122,6 @@ class Endereco {
 		$this->cidade = $array['cidade'];
 		$this->bairro = $array['bairro'];
 		$this->rua = $array['rua'];
-		return true;
     }
 }
 ?>

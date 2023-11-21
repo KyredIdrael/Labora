@@ -137,7 +137,7 @@ class Clinica {
     }
 
     public function selectAll(){
-        $cmd = $this->pdo->query("SELECT * FROM Clinica WHERE status = 1");
+        $cmd = $this->pdo->query("SELECT * FROM Clinica");
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
         if (count($con) > 0) {
             require_once 'endereco.php';

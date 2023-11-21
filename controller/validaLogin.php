@@ -1,7 +1,8 @@
 <?php
 	if (empty(addslashes($_POST['usuario'])) || empty(addslashes($_POST['email'])) || empty(addslashes($_POST['senha']))) {
-		echo "<script>window.alert('Preencha todos os dados!!!');
-			window.location.href='../view/login.php';</script>";
+		echo "<script>window.alert('Preencha todos os dados!!!');</script>";
+		sleep("1");
+		header("Location: ../view/public.php");
 			
 	} else {
 		if (addslashes($_POST['usuario']) == "Cliente") {
@@ -13,10 +14,7 @@
 				header("Location: ../view/public.php");
 
 			} else {
-				echo "<script>
-					window.alert('E-mail ou Senha Invalidos!!!');
-					window.location.href='../view/login.php';
-				</script>";
+				header("Location: ../view/login.php?error=true");
 			}
 
 		} else if (addslashes($_POST['usuario']) == "Funcionario") {
@@ -29,13 +27,11 @@
 				header("Location: ../view/public.php");
 
 			} else {
-				echo "<script>window.alert('E-mail ou Senha Invalidos!!!');
-				window.location.href='../view/login.php';</script>";
+				header("Location: ../view/login.php?error=true");
 			}
 
 		} else {
-			echo "<script>window.alert('Usuario Invalido!!!');
-			window.location.href='../view/login.php';</script>";
+			header("Location: ../view/login.php");
 		}		
 	}
 ?>

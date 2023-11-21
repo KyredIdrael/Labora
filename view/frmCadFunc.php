@@ -1,3 +1,14 @@
+<?php
+	if (!isset($_SESSION)) session_start();
+	if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || empty($_SESSION['nivelAcesso'])) {
+		session_destroy();
+		header("Location: public.php");
+	}
+	$e = addslashes($_GET['error']);
+	if ($e == true) {
+		echo "<script>window.alert('Cadastro Invalido!!');</script>";
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -81,7 +92,7 @@
 							<div class="input-group-text">
 								<button class="btn mt-0" type="button" id="ms">Mostrar Senha</button>
 							</div>
-						</div>						
+						</div>	
 					</div>
 				</div>
 				<div class="row justify-content-center">
@@ -96,7 +107,7 @@
 						<input type="text" name="cep" id="Cep" class="form-control" maxlength="9" onblur="buscaCep()" placeholder="_____-___" required/>
 						
 						<label for="Uf" class="form-label">UF</label>
-						<select class="form-select" id="Uf" name="uf" required>
+						<select class="form-select" id="Uf" name="uf" required readonly>
 							<option value="" selected></option>
 							<option value="AC">AC</option>
 							<option value="AL">AL</option>
@@ -126,14 +137,19 @@
 							<option value="SE">SE</option>
 							<option value="TO">TO</option>
 						</select>
+						
 						<label for="Cidade" class="form-label">Cidade</label>
-						<input type="text" name="cidade" id="Cidade" class="form-control" placeholder="Cidade" required/>
+						<input type="text" name="cidade" id="Cidade" class="form-control" placeholder="Cidade" required readonly/>
+
 						<label for="Bairro" class="form-label">Bairro</label>
-						<input type="text" name="bairro" id="Bairro" class="form-control" placeholder="Bairro" required/>
+						<input type="text" name="bairro" id="Bairro" class="form-control" placeholder="Bairro" required readonly/>
+
 						<label for="Rua" class="form-label">Rua</label>
-						<input type="text" name="rua" id="Rua" class="form-control" placeholder="Rua" required/>
+						<input type="text" name="rua" id="Rua" class="form-control" placeholder="Rua" required readonly/>
+
 						<label for="nRes" class="form-label">Nº da Residência</label>
 						<input type="number" name="nRes" id="nRes" class="form-control" placeholder="Nº da Residência" required/>
+
 						<label for="Comp" class="form-label">Complemento</label>
 						<textarea name="complemento" id="Comp" class="form-control" maxlength="500" rows="3" placeholder="Complemento"></textarea><br/>
 					</div>
@@ -147,22 +163,22 @@
 			</div>
 		</form>
 	</main>
-<footer id="footer" class="py-3 bg-white"></footer>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-	const tipo = document.getElementById('Senha');
-	$("#ms").click(function(e){
-		
-		if (tipo.type == "text") {
-			tipo.type = "password";
-			$(this).text("Mostrar Senha");
+	<footer id="footer" class="py-3 bg-white"></footer>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		const tipo = document.getElementById('Senha');
+		$("#ms").click(function(e){
+			
+			if (tipo.type == "text") {
+				tipo.type = "password";
+				$(this).text("Mostrar Senha");
 
-		} else {
-			tipo.type = "text";
-			$(this).text("Esconder Senha");
-		}
-	});
-</script>
-<script src="js/buscaCEP.js"></script>
-</body>
+			} else {
+				tipo.type = "text";
+				$(this).text("Esconder Senha");
+			}
+		});
+	</script>
+	<script src="js/buscaCEP.js"></script>
+	</body>
 </html>

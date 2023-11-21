@@ -1,3 +1,10 @@
+<?php
+error_reporting(0);
+	$e = addslashes($_GET['error']);
+	if ($e == true) {
+		echo "<script>window.alert('E-mail ou Senha Invalidos!!!');</script>";
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>

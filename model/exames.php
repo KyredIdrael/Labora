@@ -41,6 +41,7 @@
 	    {
 	        return $this->$atributo;
 	    }
+
 	    public function cadastraExame() {
 	    	$sql = "SELECT * FROM Exame WHERE idCliente = :idCliente AND tipoExame = :tE AND status = 0";
 	    	$cmd = $this->pdo->prepare($sql);
@@ -84,9 +85,9 @@
 	    	$cmd->bindValue(":token", $this->);
 	    	$cmd->bindValue(":dHE", $this->);
 	    	$cmd->bindParam(':st', $status, PDO::PARAM_INT, 1);
-	    	$r = $cmd->execute();
+	    	$cmd->execute();
 
-	    	if($r == true || $r == 1) {
+	    	if($cmd == true || $cmd == 1) {
 	    		return true;
 
 	    	} else {
