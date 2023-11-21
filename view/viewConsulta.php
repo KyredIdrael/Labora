@@ -58,7 +58,7 @@
 				<button type="button" class="btn btn-success" onclick="window.location.href='<?php 
 				//error_reporting(0);
 				if (addslashes($_GET['table']) == "Clinica") {
-					echo "frmCadClinica.html";
+					echo "frmCadClinica.php";
 				} else if (addslashes($_GET['table']) == "Endereco") {
 					echo "frmCadEndereco.php";
 				} else if (addslashes($_GET['table']) == "ADM"){

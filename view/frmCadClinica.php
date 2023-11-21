@@ -148,6 +148,7 @@
             jsonString = JSON.stringify(array);
             strJson.value = jsonString;
             servicos.value = array.join(', ');
+            servico.value = '';
             console.log(strJson.value);
         }
 

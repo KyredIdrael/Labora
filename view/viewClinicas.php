@@ -28,7 +28,7 @@
     <body>
         <header id="header"></header>
         <nav id="nav" class="navbar navbar-expand-lg navbar-dark"></nav>
-        <main class="container">
+        <main class="container" id="conteudo">
             <section class="row">
                 <div class="col-12 text-center">
                     Para começar o cadastro de um exame basta clicar no serviço da cliníca.
@@ -44,18 +44,69 @@
             <section class="container-fluid" id="form-exame">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-auto">
-                        <div class="input-group">
-                            <label for="Clinica"></label>
-                            <input type="text" class="form-control" name="clinica" id="Clinica" placeholder="Clinica" readonly/>
-                        </div>
-                        <div class="input-group">
-                            <label for="Servico"></label>
-                            <input type="text" class="form-control" id="Servico" placeholder="Exame" readonly/>
-                        </div>
+                        <form action="../controller/cadExame.php">
+                            <div class="input-group">
+                                <label for="Clinica"></label>
+                                <input type="text" class="form-control" name="clinica" id="Clinica" placeholder="Clinica" readonly/>
+                            </div>
+                            <div class="input-group">
+                                <label for="Servico"></label>
+                                <input type="text" class="form-control" id="Servico" placeholder="Exame" readonly/>
+                            </div>
+                            <input type="submit" value="Marcar Exame">
+                        </form>
                     </div>
                 </div>
             </section>
-        </main>        
+        </main> 
+        <style>   
+            #form-exame{
+                display: block;
+                box-sizing: border-box;
+                position: fixed;
+                width: 75%;
+                height: 75%;
+                top: 10%;
+                left: 0;
+                right: 0;
+                padding: 20px;
+                background-color: #efd7ff;
+                border: 2px solid #c59fde;
+                border-radius: 8px;
+                box-shadow: 0px 5px 15px -5px gray;
+            }
+        </style>
+
+        <input id="abrir-popup" name="popup" type="radio" hidden>
+        <input id="fechar-popup" name="popup" type="radio" hidden checked>
+
+        <label id="abrir-popup-btn" for="abrir-popup">Abrir</label>
+        <label id="fechar-popup-btn" for="fechar-popup">Fechar</label>
+
+        <div id="conteudo">
+          <p>Conteúdo</p>
+        </div>   
         <footer id="footer" class="py-3"></footer>
+        <script type="text/javascript">
+            function marcarExame() {
+                $(".servicos").click(function () {
+                    let id = parseInt(Number(this.id));
+                    let str = document.getElementById("c"+id);
+                    $("#form-exame").show();
+                    $("#Clinica").val(str.textContent);
+                    $("#Servico").val(this.text);
+                });
+            }
+            
+            $("#form-exame").mouseleave(function () {
+                if (document.getElementById('form-exame').style.display == 'none') {
+                    $("#form-exame").show();
+                }else{
+                    
+                    $("#form-exame").hide();
+                }
+            });
+            
+        </script>
     </body>
 </html>

@@ -146,15 +146,17 @@ class Clinica {
                 $end->id = $con[$i]['idEnd'];
                 $end->getEndById();
                 $endereco = $end->rua.", ".$con[$i]['nRes']." - ".$end->bairro.", ".$end->cidade." - ".$end->uf. ", ".$end->cep;
-                $str = stripslashes($con[$i]['servicos']);
-                preg_replace("/[\x00-\x1F\x80-\xFF]/", '', $str);
-                $this->servicos = json_decode($str, true);
+
+                $str = preg_replace("/[\x00-\x1F\x80-\xFF]/", '', stripslashes($con[$i]['servicos']));
+                $this->servicos  = json_decode($str, true);
                 echo "<tr>
                         <td>
                             <p class='dados'>Código de clinica: ".$con[$i]['id']."</p>
                             <p class='dados'>Nome: ".$con[$i]['nome']."</p>
                             <p class='dados'>Serviços:<br/>";
-                echo $this->mostraServicos($this->servicos);
+                foreach ($this->servicos as $servico) {
+                    echo "- ".$servico."<br/>";
+                }
                 echo "</ul></p>
                     <p class='dados'>E-mail: ".$con[$i]['email']."
                     </p>
@@ -184,20 +186,23 @@ class Clinica {
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
         if (count($con) > 0) {
             require_once 'endereco.php';
-            $end = new Endereco();          
+            $end = new Endereco();
+            $i = 0; 
             foreach ($con as $registro) {
                 $end->id = $registro['idEnd'];
                 $end->getEndById();
                 $endereco = $end->rua.", ".$registro['nRes']." - ".$end->bairro.", ".$end->cidade." - ".$end->uf. ", ".$end->cep;
-                $str = stripslashes($registro['servicos']);
-                $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $str);
+                $str = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', stripslashes($registro['servicos']));
                 $this->servicos = json_decode($str, true);
 
                 echo '<div class="col-sm-12 col-md-6 card">
-                            <h4>'.$registro['nome'].'</h4>
+                            <h4 id="c'.$registro['id'].'">'.$registro['nome'].'</h4>
                             <p>
                                 <strong class="dTitle">Serviços</strong>:<br/>';
-                $this->mostraServicos($this->servicos);
+                foreach ($this->servicos as $servico) {
+                    echo "<a onclick='marcarExame()' class='servicos link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover' id='".$registro['id'].".".$i."'>".$servico."</a><br/>";
+                    $i++;
+                }
                 echo '</p>
                     <p>
                         <strong class="dTitle">Endereço</strong>: '.$endereco.'
@@ -213,9 +218,7 @@ class Clinica {
     }
 
     protected function mostraServicos($array) {
-        foreach ($array as $key) {
-            echo "- ".$key."<br/>";
-        }
+        
     }
 }
 ?>
