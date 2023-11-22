@@ -12,7 +12,6 @@
 				<button type="button" class="btnNav dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Serviços</button>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="viewClinicas.php">Clinicas</a></li>
-					<li><a class="dropdown-item" href="viewExames.php">Exames</a></li>
 				</ul>
 			</li>
 			<li class="nav-item col-sm-12 col-md-auto">

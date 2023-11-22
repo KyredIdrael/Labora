@@ -28,7 +28,7 @@
 				echo '<main id="main" class="container">
 						<div class="row justify-content-center">
 						<div class="col-5">
-							<p class="mt-5">O AgendME é um serviço de agendamento Exames Médicos.</p>
+							<p class="mt-5">O Labora é um serviço de agendamento Exames Médicos.</p>
 							<ul>
 								<li>Exames de Rotina</li>
 								<li>Cardiologia</li>
@@ -46,7 +46,7 @@
 				echo '<nav class="container">
 						<div class="row justify-content-center">
 							<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="window.location.href=public.php">Dados Pessoais</button>
-							<button type="button" class="btnNav col-sm-12 col-md-auto">Exames Marcados</button>
+							<button type="button" class="btnNav col-sm-12 col-md-auto" onclick="'."window.location.href='examesMarcados.php'".'">Exames Marcados</button>
 						</div>										
 					</nav>';
 			} else if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['nivelAcesso'])) {

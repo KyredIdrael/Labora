@@ -83,14 +83,12 @@
 			$cli->cpf =  $str->cleanNumbers(addslashes($_POST['cpf']));
 
 			$cli->end = (object) array('cep' => $cep, 'uf' => addslashes($_POST['uf']), 'cidade' => addslashes($_POST['cidade']), 'bairro' => addslashes($_POST['bairro']), 'rua' => addslashes($_POST['rua']), 'idEnd' => '');
-			echo "aq1";
 			if ($cli->alteraCliente() == true) {
 				header("Location: ../view/dadosPessoais.php");
 			} else {
 				header("Location: ../view/error.php");
 			}
 		}
-		echo "aq2";
 	}else {
 		header("Location: ../view/public.php");
 	}

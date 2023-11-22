@@ -1,4 +1,9 @@
 <?php
+	if (!isset($_SESSION)) session_start();
+	if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || !isset($_SESSION['nivelAcesso'])) {
+		session_destroy();
+		header("Location: public.php"); exit;
+	}
 	if (isset($_POST['nome']) && isset($_POST['servicos']) &&
 	isset($_POST['email']) && isset($_POST['tel']) &&	
 	isset($_POST['cep']) && isset($_POST['uf']) &&

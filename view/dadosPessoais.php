@@ -29,7 +29,17 @@
 	<header id="header"></header>
 	<nav id="nav"></nav>
 	<div class="container"></div>
-	<?php require_once '../controller/meusDados.php'; ?>
+	<?php
+		if ($_SESSION['nivelAcesso']) {
+			require_once '../model/func.php';
+			$func = new Funcionario();
+			$con = $func->getForUp();
+		} else {
+			require_once '../model/cliente.php';
+			$cli = new Cliente();
+			$con = $cli->getForUp();
+		}
+	?>
 	<footer id="footer"></footer>
 </body>
 </html>

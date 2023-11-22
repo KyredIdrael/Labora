@@ -200,7 +200,7 @@ class Clinica {
                             <p>
                                 <strong class="dTitle">Serviços</strong>:<br/>';
                 foreach ($this->servicos as $servico) {
-                    echo "<a onclick='marcarExame()' class='servicos link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover' id='".$registro['id'].".".$i."'>".$servico."</a><br/>";
+                    echo "<a class='servicos link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover' id='".$registro['id'].".".$i."'>".$servico."</a><br/>";
                     $i++;
                 }
                 echo '</p>
@@ -216,9 +216,15 @@ class Clinica {
             }
         }
     }
-
-    protected function mostraServicos($array) {
-        
+    public function getClinica()
+    {
+        $cmd = $this->pdo->prepare("SELECT nome FROM Clinica WHERE id = :id");
+        $cmd->bindValue(":id", $this->id);
+        $cmd->execute(); 
+        $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
+        if (count($con) > 0) {
+            return $con[0]['nome'];
+        }
     }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 	if (!isset($_SESSION)) session_start();
 	if (!isset($_SESSION['id']) || !isset($_SESSION['email']) || empty($_SESSION['nivelAcesso'])) {
 		session_destroy();
@@ -63,7 +64,7 @@
                         <label for="EstadoCivil" class="form-label">Estado Civil</label>
 						<select name="estadocivil" id="EstadoCivil" class="form-select">
 							<option selected>Selecione o Estado Civil</option>
-							<option value="sol">Solteiro</option>
+							<option value="solteiro">Solteiro</option>
 							<option value="casado">Casado</option>
                             <option value="noivo">Noivo</option>
                             <option value="viúvo">Viúvo</option>

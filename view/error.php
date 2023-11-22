@@ -26,7 +26,7 @@
 		<br/>Desculpe, estamos com nosso sistema em manutenção.
 		<br/>Tente novamente mais tarde...
 		<br/>
-		<a href='http://localhost/tazware/v/index.php'>Login</a>	
+		<a href='public.php'>Login</a>	
 	</center>			
 </body>
 </html>
