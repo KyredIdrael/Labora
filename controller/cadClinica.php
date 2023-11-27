@@ -32,10 +32,10 @@
         
 		
 		if ($cli->verificaClinica() == true) {
-			header("Location: ../view/viewConsulta.php?table=Clinica");
+			//header("Location: ../view/viewConsulta.php?table=Clinica");
 
 		} else {
-			echo "<script>
+			/*echo "<script>
 	        	window.alert('Erro no cadastro, verifique se a cliníca já existe, por favor.');
 	        	window.location.href='../view/viewConsulta.php?table=Clinica';
 	        </script>";
@@ -46,6 +46,6 @@
         	window.alert('Preencha todos os campos');
         	window.location.href='../view/public.php';
         </script>";
-	}
+	*/}
 	exit;
 ?>

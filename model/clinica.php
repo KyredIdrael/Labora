@@ -166,12 +166,12 @@ class Clinica {
                     <p> Status: ".$con[$i]['status']."</p>
                     </td>
                     <td style='width: 5%;'>
-                        <a href='../v/viewAlterar.php?table=Clinica&id_up=".$con[$i]['id']."'>
+                        <a href='viewAlterar.php?table=Clinica&id_up=".$con[$i]['id']."'>
                             <img class='btnAlt' src='img/icons/altclaro.png'/>
                         </a>
                     </td>
                     <td style='width: 5%;'>
-                        <a href='../c/processa_ex.php?table=Clinica&id_ex=".$con[$i]['id']."'>
+                        <a href='../controller/processaDes.php?table=Clinica&id_ex=".$con[$i]['id']."'>
                             <img class='btnDel' src='img/icons/delclaro.png'/>
                         </a>
                     </td>					
@@ -216,6 +216,7 @@ class Clinica {
             }
         }
     }
+
     public function getClinica()
     {
         $cmd = $this->pdo->prepare("SELECT nome FROM Clinica WHERE id = :id");
@@ -224,6 +225,110 @@ class Clinica {
         $con = $cmd->fetchAll(PDO::FETCH_ASSOC);
         if (count($con) > 0) {
             return $con[0]['nome'];
+        }
+    }
+    public function getForUp()
+    {
+        $cmd = $this->pdo->prepare("SELECT * FROM Clinica WHERE id = :id");
+        $cmd->bindValue(":id", $this->id);
+        $cmd->execute(); 
+        $con = $cmd->fetch(PDO::FETCH_ASSOC);
+        
+        require_once 'endereco.php';
+        $end = new Endereco();
+        if (count($con) > 0) {
+            $end->id = $con['idEnd'];
+            $end->getEndById();
+            echo '<div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                 <h2 class="my-3">Dados da Cliníca</h2><br />
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <input type="hidden" name="id" value="'.$con['id'].'"/>
+
+                            <label for="Nome" class="form-label">Nome*</label>
+                            <input type="text" name="nome" id="Nome" class="form-control" placeholder="Nome" autocomplete="true" value="'.$con['nome'].'"/>
+
+                            <label for="Email" class="form-label">E-mail*</label>   
+                            <input type="text" name="email" class="form-control" placeholder="E-mail" value="'.$con['email'].'"> 
+
+                            <label for="Tel" class="form-label">Telefone*</label>
+                            <input type="text" name="tel" id="Tel" class="form-control" placeholder="(__) ____-____" value="'.$con['telefone'].'" required/>
+
+                            <label for="servico" class="form-label">Serviço*</label>
+                            <input type="text" id="servico" class="form-control" placeholder="Serviço" autocomplete="true"/>
+                            
+                            <button type="button" class="form-control btn btn-secondary my-1" onclick="adicionarServico()">Adicionar Serviço</button>
+                            <button type="button" class="form-control btn btn-danger" onclick="removerServico()">Remover Serviço</button>
+
+                            <label for="servicos" class="form-label">Lista de Serviços associados</label>
+                            <textarea id="servicos" class="form-control" placeholder="Serviços Associados" readonly></textarea>
+
+                            <input type="hidden" name="servicos" id="strJson"/>                
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <br/><br/>
+                            <h2>Endereço</h2><br/>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                
+                            <label for="Cep" class="form-label" on>CEP*</label>
+                            <input type="text" name="cep" id="Cep" class="form-control" onblur="buscaCep()" maxlength="8" placeholder="_____-___"  value="'.$end->cep.'" required/>
+                
+                            <label for="Uf" class="form-label">UF*</label>
+                            <select class="form-select" id="Uf" name="uf" required>
+                                <option  value="'.$end->uf.'" selected> value="'.$end->uf.'"</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                
+                            <label for="Cidade" class="form-label">Cidade*</label>
+                            <input type="text" name="cidade" id="Cidade" class="form-control" placeholder="Cidade" value="'.$end->cidade.'" required />
+                
+                            <label for="Bairro" class="form-label">Bairro*</label>
+                            <input type="text" name="bairro" id="Bairro" class="form-control" placeholder="Bairro" value="'.$end->bairro.'" required />
+                
+                            <label for="Rua" class="form-label">Rua*</label>
+                            <input type="text" name="rua" id="Rua" class="form-control" placeholder="Rua" value="'.$end->rua.'" required />
+                
+                            <label for="nRes" class="form-label">Nº da Residência*</label>
+                            <input type="number" name="nRes" id="nRes" class="form-control" placeholder="Nº da Residência" value="'.$con['nRes'].'" required />
+                            
+                            <label for="Comp" class="form-label">Complemento</label>
+                            <textarea name="complemento" id="Comp" class="form-control mb-2" maxlength="500" rows="3" placeholder="Complemento" value="'.$con['complemento'].'"></textarea>              
+                        </div>
+                    </div>';
         }
     }
 }

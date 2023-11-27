@@ -246,14 +246,6 @@
 			}
 		}
 
-		public function desabilitarCliente()
-		{
-	        $sql = "UPDATE Cliente WHERE id = :id SET status = 0";
-	        $cmd = $this->pdo->prepare($sql);
-			$cmd->bindValue(":id", $this->id);
-	        $cmd->execute();
-	    }
-
 	    public function getForUp()
 	    {
 	    	$cmd = $this->pdo->prepare("SELECT * FROM Cliente WHERE id = :id");			

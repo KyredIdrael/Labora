@@ -75,5 +75,7 @@ CREATE TABLE Exame
 INSERT INTO Endereco (cep, uf, cidade, bairro, rua, status)
 	VALUES ('00000000', 'RT', 'root', 'roor', 'root', 1);
 
+INSERT INTO Cliente(nome, rg, cpf, email, senha, dataNasc, genero, telefone, celular, nResidencial, idEnd, complemento) 
+	VALUES ('root', '0000000000', '00000000000', 'root@root', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', '2023-01-01', 'root', '0000000000', '00000000000', 0, 1, 'root');
 INSERT INTO Funcionario(nome, rg, cpf, email, senha, dataNasc, genero, estadoCivil, telefone, celular, nResidencial, idEnd, complemento, status, nivelAcesso) 
 	VALUES ('root', '0000000000', '00000000000', 'root@root', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', '2023-01-01', 'R', 'root', '0000000000', '00000000000', 0, 1, 'root', 1, 10);

@@ -15,10 +15,10 @@
 		$exa->tipoExame = addslashes($_POST['exame']);
 		$exa->token = hash("sha256", base64_encode(uniqid()));
 		if ($exa->cadastrarExame() == false) {
-			echo "<script>alert('Não foi possivel cadastrar o exame.\nNão é possivel cadastrar o mesmo serviço.\nNão é possivel cadastrar mais de 3 exames.');
+			echo "<script>window.alert('Não foi possivel cadastrar o exame.\nNão é possivel cadastrar o mesmo serviço.\nNão é possivel cadastrar mais de 3 exames.');
 			window.location.href='../view/examesMarcados.php';</script>";
 		} else {
-			echo "<script>alert('Exame Marcado!');
+			echo "<script>window.alert('Exame Marcado!');
 			window.location.href='../view/examesMarcados.php';</script>";
 		}
 	}
